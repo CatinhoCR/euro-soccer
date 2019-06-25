@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="AngularJs Starter">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta http-equiv="content-language" content="pt-PT,pt" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="date" content="LAST-MODIFIED-DATE" />
+  <meta http-equiv="last-modified" content="LAST-MODIFIED-DATE" />
+  <base href="/">
+  <!-- build:css(.) styles/vendor.css -->
+  <link href="/node_modules/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
+  <!-- endbuild -->
+  <!-- build:css(.) styles/bundle.css -->
+  <link href='/node_modules/angular-loading-bar/build/loading-bar.css' rel='stylesheet' type='text/css' media='all' />
+  <link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="/node_modules/angular-moment-picker/dist/angular-moment-picker.css" rel="stylesheet" />
+  <link href="/node_modules/ui-bootstrap4/dist/ui-bootstrap-csp.css" rel="stylesheet" />
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/app.css -->
+  <link rel="stylesheet" href="styles/app.css" />
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/styles.css -->
+  <link rel="stylesheet" href="styles/layout.css" />
+  <!-- endbuild -->
+  <!-- build:css(.) styles/md.css -->
+  <link href='/node_modules/toastr/build/toastr.css' rel='stylesheet' type='text/css' media='all' />
+  <link href='/node_modules/mdbootstrap/css/mdb.css' rel='stylesheet' type='text/css' media='all' />
+  <!-- endbuild -->
+</head>
+
+<body ng-app="angularjs-starter">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3" ng-controller="HeaderController">
+    <div class="container">
+      <a class="navbar-brand" ui-sref="main">
+        <img src="images/icon.png" width="30" height="30" class="d-inline-block align-top" alt="AngularJs Starter">
+        AngularJs Starter
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#headerMenu"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="hamburger d-flex flex-column justify-content-around text-center">
+          <div class="hamburger__patty"></div>
+          <div class="hamburger__patty"></div>
+          <div class="hamburger__patty"></div>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="headerMenu">
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" ui-sref-active="active">
+            <a class="nav-link" ui-sref="main">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item" ui-sref-active="active">
+            <a class="nav-link" ui-sref="about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <nav class="navbar navbar-dark bg-primary py-0 mb-3">
+    <div class="container">
+      <span class="navbar-text">
+        Navbar text with an inline element
+      </span>
+    </div>
+  </nav>
+
+  <main role="main" ui-view="content" class="container"></main>
+
+  <!--Footer-->
+  <footer class="page-footer text-center text-md-left font-small blue pt-4 mt-4">
+    <!--Footer Links-->
+    <div class="container text-center text-md-left">
+      <div class="row">
+
+        <!--First column-->
+        <div class="col-md-6 pb-3">
+          <h5 class="text-uppercase">Versionss</h5>
+          <p>{{footer.version}}</p>
+        </div>
+        <!--/.First column-->
+      </div>
+    </div>
+    <!--/.Footer Links-->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3 text-center">
+      © {{footer.year}} Copyright
+      <a href="https://ricardocarneiro.pt" target="_blank"> Ricardo Carneiro</a>.
+    </div>
+    <!--/.Copyright-->
+  </footer>
+  <!--/.Footer-->
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
+  <script src="node_modules/angular/angular.js" type="text/javascript"></script>
+  <script src="node_modules/angular-animate/angular-animate.js" type="text/javascript"></script>
+  <script src="node_modules/angular-route/angular-route.js" type="text/javascript"></script>
+  <script src="node_modules/angular-cookies/angular-cookies.js" type="text/javascript"></script>
+  <!-- endbuild -->
+  <!-- build:js(.) scripts/md.js -->
+  <script src="node_modules/mdbootstrap/js/mdb.js" type="text/javascript"></script>
+  <script src="/node_modules/toastr/build/toastr.min.js" type="text/javascript"></script>
+  <!-- endbuild -->
+  <!-- build:js(.) scripts/suppliers.js -->
+  <script src="node_modules/angular-sanitize/angular-sanitize.js" type="text/javascript"></script>
+  <script src="node_modules/angular-touch/angular-touch.js" type="text/javascript"></script>
+  <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
+  <script src="node_modules/angular-loading-bar/build/loading-bar.js" type="text/javascript"></script>
+  <!-- endbuild -->
+  <!-- build:js(.) scripts/scripts.js -->
+  <script src="node_modules/popper.js/dist/umd/popper.js" type="text/javascript"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.js" type="text/javascript"></script>
+  <!-- endbuild -->
+  <!-- build:js(.) scripts/bundles.js -->
+  <script src="node_modules/moment/min/moment-with-locales.js" type="text/javascript"></script>
+  <script src="node_modules/angular-moment-picker/dist/angular-moment-picker.js" type="text/javascript"></script>
+  <script src="node_modules/chart.js/dist/Chart.js" type="text/javascript"></script>
+  <script src="node_modules/angular-chart.js/dist/angular-chart.js" type="text/javascript"></script>
+  <script src="node_modules/ui-bootstrap4/dist/ui-bootstrap-tpls.js" type="text/javascript"></script>
+  <script src="node_modules/angular-moment/angular-moment.js" type="text/javascript"></script>
+  <script src="node_modules/angular-file-upload/dist/angular-file-upload.js" type="text/javascript"></script>
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/starter.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/home.controller.js"></script>
+  <script src="scripts/controllers/about.controller.js"></script>
+  <script src="scripts/controllers/header.controller.js"></script>
+  <script src="scripts/factories/auth.interceptor.js"></script>
+  <script src="scripts/services/progressBar.js"></script>
+  <!-- endbuild -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=XX-XXXXXXXXXXX-X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'XX-XXXXXXXXXXX-X');
+  </script>
+</body>
+
+</html>
