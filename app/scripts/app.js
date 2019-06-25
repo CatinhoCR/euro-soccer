@@ -15,15 +15,23 @@
       "chart.js",
       "ui.bootstrap",
       "angularMoment",
-      "angularFileUpload"
+      "angularFileUpload",
+      "app.dashboard"
     ])
     .constant('constants', {
-      "url": "http://localhost:50560/api/",
+      "url": "https://api.football-data.org/v2/",
       'version': '2.0.0'
     })
+
+    .constant('env', {
+      apiUrl: "https://api.football-data.org/v2/",
+      apiKey: 'd9b2c29baac94818a4908116a55d6f08',
+      
+    })
+
     .config(["momentPickerProvider", function (momentPickerProvider) {
       momentPickerProvider.options({
-        locale: "pt"
+        locale: "en"
       });
     }])
     .config(function (ChartJsProvider) {
@@ -53,6 +61,18 @@
             content: {
               templateUrl: 'views/home.html',
               controller: 'HomeController'
+            }
+          },
+          data: {
+            needsAuth: false
+          }
+        })
+        .state('dashboard', {
+          url: "/dashboard",
+          views: {
+            content: {
+              templateUrl: 'views/dashboard.html',
+              controller: 'DashboardCtrl'
             }
           },
           data: {
