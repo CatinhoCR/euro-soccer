@@ -16,7 +16,9 @@
       "ui.bootstrap",
       "angularMoment",
       "angularFileUpload",
-      "app.dashboard"
+      "app.dashboard",
+      "app.league",
+      "app.team"
     ])
     .constant('constants', {
       "url": "https://api.football-data.org/v2/",
@@ -59,32 +61,35 @@
           url: "/",
           views: {
             content: {
-              templateUrl: 'views/home.html',
-              controller: 'HomeController'
-            }
-          },
-          data: {
-            needsAuth: false
-          }
-        })
-        .state('dashboard', {
-          url: "/dashboard",
-          views: {
-            content: {
               templateUrl: 'views/dashboard.html',
-              controller: 'DashboardCtrl'
+              controller: 'DashboardCtrl',
+              controllerAs: 'vm'
             }
           },
           data: {
             needsAuth: false
           }
         })
-        .state('about', {
-          url: "/about",
+        .state('league', {
+          url: '/league/:leagueId',
           views: {
             content: {
-              templateUrl: 'views/about.html',
-              controller: 'AboutController'
+              templateUrl: 'views/league.html',
+              controller: 'LeagueCtrl',
+              controllerAs: 'vm'
+            }
+          },
+          data: {
+            needsAuth: false
+          }
+        })
+        .state('favorite-teams', {
+          url: '/favorite-teams',
+          views: {
+            content: {
+              templateUrl: 'views/favorites.html',
+              controller: 'TeamCtrl',
+              controllerAs: 'vm'
             }
           },
           data: {

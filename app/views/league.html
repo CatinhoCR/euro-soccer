@@ -1,0 +1,49 @@
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Pos.
+                </th>
+                <th colspan="2">
+                    Team
+                </th>
+                <th>
+                    GP
+                </th>
+                <th>
+                    W
+                </th>
+                <th>
+                    D
+                </th>
+                <th>
+                    L
+                </th>
+                <th>GF</th>
+                <th>GA</th>
+                <th>GD</th>
+                <th>Pts</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="table in vm.standings">
+                <td>
+                    {{table.position}}
+                </td>
+                <td>
+                    <img width="40px" ng-src="{{table.team.crestUrl}}" alt="">
+                </td>
+                <td>{{table.team.name}}</td>
+                <td>{{table.playedGames}}</td>
+                <td>{{table.won}}</td>
+                <td>{{table.draw}}</td>
+                <td>{{table.lost}}</td>
+                <td>{{table.goalsFor}}</td>
+                <td>{{table.goalsAgainst}}</td>
+                <td>{{table.goalDifference}}</td>
+                <td>{{table.points}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

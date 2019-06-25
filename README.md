@@ -1,26 +1,23 @@
-# AngularJS Starter
+# "Score Now" app developed for Eleven Systems job application's test
+This app has been developed by Andrés Castillo ([(Email)](mailto:cato@castilloquesada.com)) as part of the job application process for Eleven Systems.
+
+## Based and Modified from AngularJS Starter
+Used a seed starter project for quick angularJS app setup, but heavily modified before starting to work. Some of the initial modifications include (but not limited to):
+* Removed jQuery dependency and usage
+* Development environments and API connection setup basic setup
+* Changing/Updating/Removing some of the development dependencies such as Twitter Bootstrap, font awesome, etc.
+* Changes to gulpfile and workflow.
+
 
 [![Build Status](https://travis-ci.org/rjcarneiro/angularjs-starter.svg?branch=master)](https://travis-ci.org/rjcarneiro/angularjs-starter)
 
 A complete out-of-the-box starter pack to develop web apps using [AngularJs](https://angularjs.org/) and [Bootstrap](http://getbootstrap.com/).
-
-## Changelog
-
-- 2018-10-02: Update npm packages to the latest version;
-- 2018-05-11: Add Material design bootstrap, update bootstrap v4.1.1 and update all libs;
-- 2018-01-27: Updated to bootstrap v4.0.0 stable;
-- 2018-01-02: Added fontawesome as a dependency;
-- 2017-12-29: Updated bootstrap v4.0.0-beta.3;
-- 2017-11-18: Added [bootstrap4-fs-modal](https://github.com/keaukraine/bootstrap4-fs-modal) to put modals as fullscreen in mobile devices;
-- 2017-11-09: Added progress bar every time the route changes;
-- 2017-11-08: bootstrap 4.0.0.0-beta all set up;
 
 ## How to use
 
 In order to start just follow the steps:
 
 <pre>
-git clone https://github.com/rjcarneiro/angularjs-starter.git
 npm install
 gulp serve
 </pre>
@@ -45,13 +42,7 @@ In order to build the project, just need to run `gulp build` or even just `gulp`
 
 To make sure your javascript code has quality we use [jslint](http://www.jslint.com/). To run the tool just type `gulp jslint` and you can see the output. Also [Team City](https://www.jetbrains.com/teamcity/) integration is already made.
 
-## Contributors
 
-Feel free to open `pull-requests` and contribute to this code.
-
-### People that contribute to this project
-
-- [Ricardo Carneiro](https://github.com/rjcarneiro)
 
 ## Used Libraries
 
@@ -63,7 +54,7 @@ Feel free to open `pull-requests` and contribute to this code.
 
 ### The MIT License
 
-Copyright (c) 2017 Ricardo Carneiro
+Copyright (c) 2019 Andrés Castillo
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

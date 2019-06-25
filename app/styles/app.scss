@@ -1,11 +1,42 @@
-$primary: #2972AB;
-$secondary: #164479;
-$body-bg: #f8f9fa;
-$brown: #C8785C;
-$yellow: #FED049;
-$gray-400: #ced4da;
-$enable-rounded: false;
-$enable-caret:false;
-$form-feedback-valid-color: $gray-400;
-$enable-gradients: false;
-@import "node_modules/bootstrap/scss/bootstrap.scss";
+@charset 'UTF-8';
+
+// 1. Vendors' ** Generally used with Angular CLI, change as needed
+@import
+  'vendors/bootstrap';
+
+// 2. Configuration and helpers
+@import
+  'abstracts/variables',
+  'abstracts/functions',
+  'abstracts/mixins';
+
+// 3. Base stuff
+@import
+  'base/base',
+  'base/fonts',
+  'base/typography',
+  'base/helpers';
+
+// 4. Layout-related sections
+@import
+  'layout/header',
+  'layout/navigation',
+  'layout/sidebar',
+  'layout/grid',
+  'layout/tables',
+  'layout/forms',
+  'layout/footer';
+
+// 5. Components
+@import
+  'components/buttons',
+  'components/dropdowns';
+
+// 6. Page/Module specific styles
+@import
+  'pages/home';
+
+// 7. Themes
+@import
+  'themes/default',
+  'themes/admin';
