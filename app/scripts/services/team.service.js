@@ -10,7 +10,8 @@
     function TeamService($http, env, $stateParams, $uibModal, $log) {
         var service = this;
 
-        service.selectedTeam, service.teamStats;
+        service.selectedTeam = {};
+        service.teamStats;
 
         service.getTeamStats = getTeamStats;
         // service.getTeamPlayers = getTeamPlayers;
@@ -37,20 +38,20 @@
             // console.log(service.selectedTeam);
             getTeamStats(team)
                 .then(function(result){
-                    console.log(result.data);
+                    // console.log(result.data);
                     service.selectedTeam = result.data;
                 });
             
                 
                 service.modal = $uibModal.open({
                     animation: true,
-                    templateUrl: 'app/views/team-modal.html',
+                    templateUrl: '../../views/team-modal.html',
                     controller: 'TeamCtrl',
-                    controllerAs: 'tm',
+                    controllerAs: 'vm',
                     size: 'lg',
                     resolve: {
-                        data: function () {
-                            return service.selectedTeam;
+                        team: function () {
+                            return service.selectedTeam
                         }
                     }
                     /*
