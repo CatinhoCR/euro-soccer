@@ -7,7 +7,7 @@
 
     TeamCtrl.$inject = ['TeamService', '$stateParams', '$state'];
 
-    function TeamCtrl(TeamService, $stateParams, $state) {
+    function TeamCtrl(TeamService, $stateParams, $state, $location) {
         var vm = this;
         vm.team = {};
         

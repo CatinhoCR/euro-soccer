@@ -1,7 +1,7 @@
-(function () {
-  'use strict';
+(function() {
+  "use strict";
   angular
-    .module('angularjs-starter', [
+    .module("angularjs-starter", [
       "ngAnimate",
       "ngCookies",
       "ngRoute",
@@ -17,87 +17,134 @@
       "angularFileUpload",
       "app.dashboard",
       "app.league",
-      "app.team"
+      "app.team",
+      "app.match"
     ])
-    .constant('constants', {
-      "url": "https://api.football-data.org/v2/",
-      'version': '2.0.0'
+    .constant("constants", {
+      url: "https://api.football-data.org/v2/",
+      version: "2.0.0"
     })
 
-    .constant('env', {
+    .constant("env", {
       apiUrl: "https://api.football-data.org/v2/",
-      apiKey: 'd9b2c29baac94818a4908116a55d6f08',
-      
+      apiKey: "d9b2c29baac94818a4908116a55d6f08"
     })
 
-    .config(["momentPickerProvider", function (momentPickerProvider) {
-      momentPickerProvider.options({
-        locale: "en"
-      });
-    }])
-    .config(function (ChartJsProvider) {
+    .config([
+      "momentPickerProvider",
+      function(momentPickerProvider) {
+        momentPickerProvider.options({
+          locale: "en"
+        });
+      }
+    ])
+    .config(function(ChartJsProvider) {
       ChartJsProvider.setOptions("global", {
-        colors: ["#2972AB", "#C8785C", "#164479", "#FED049", "#e83e8c", "#949FB1", "#28a745"]
+        colors: [
+          "#2972AB",
+          "#C8785C",
+          "#164479",
+          "#FED049",
+          "#e83e8c",
+          "#949FB1",
+          "#28a745"
+        ]
       });
     })
-    .config(function ($locationProvider) {
+    .config(function($locationProvider) {
       $locationProvider.html5Mode(true);
     })
-    .config(function ($httpProvider) {
-      $httpProvider.interceptors.push('authInterceptor');
+    .config(function($httpProvider) {
+      $httpProvider.interceptors.push("authInterceptor");
     })
-    .config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
-      cfpLoadingBarProvider.includeSpinner = false;
-      cfpLoadingBarProvider.latencyThreshold = 500;
-    }])
-    .config(function ($urlRouterProvider, $stateProvider) {
+    .config([
+      "cfpLoadingBarProvider",
+      function(cfpLoadingBarProvider) {
+        cfpLoadingBarProvider.includeSpinner = false;
+        cfpLoadingBarProvider.latencyThreshold = 500;
+      }
+    ])
+    .config(function($urlRouterProvider, $stateProvider) {
       // default route
       $urlRouterProvider.otherwise("/");
 
       // ui router states
       $stateProvider
-        .state('main', {
+        .state("main", {
           url: "/",
           views: {
             content: {
-              templateUrl: 'views/dashboard.html',
-              controller: 'DashboardCtrl',
-              controllerAs: 'vm'
+              templateUrl: "views/dashboard.html",
+              controller: "DashboardCtrl",
+              controllerAs: "vm"
             }
           },
           data: {
             needsAuth: false
           }
         })
-        .state('league', {
-          url: '/league/:leagueId',
+        .state("league", {
+          url: "/league/:leagueId",
           views: {
             content: {
-              templateUrl: 'views/league.html',
-              controller: 'LeagueCtrl',
-              controllerAs: 'vm'
+              templateUrl: "views/league.html",
+              controller: "LeagueCtrl",
+              controllerAs: "vm"
             }
           },
           data: {
             needsAuth: false
           }
         })
-        .state('favorite-teams', {
-          url: '/favorite-teams',
+        .state("team", {
+          url: "/team/:teamId/matches",
           views: {
             content: {
-              templateUrl: 'views/favorites.html',
-              controller: 'TeamCtrl',
-              controllerAs: 'vm'
+              templateUrl: "views/team-matches.html",
+              controller: "TeamMatchesCtrl",
+              controllerAs: "vm"
+            }
+          },
+          data: {
+            needsAuth: false
+          }
+        })
+        .state("favorite-teams", {
+          url: "/favorite-teams",
+          views: {
+            content: {
+              templateUrl: "views/favorites.html",
+              controller: "TeamCtrl",
+              controllerAs: "vm"
             }
           },
           data: {
             needsAuth: false
           }
         });
-
     })
-    .run(function ($trace, $transitions, $window, $rootScope, constants) {
+    .run(function(
+      $trace,
+      $transitions,
+      $window,
+      $rootScope,
+      constants,
+      $uibModalStack
+    ) {
+      // close the opened modal on location change.
+      /*
+      $rootScope.$on("$locationChangeStart", function($event) {
+        var openedModal = $uibModalStack.getTop();
+        if (openedModal) {
+          if (!!$event.preventDefault) {
+            $event.preventDefault();
+          }
+          if (!!$event.stopPropagation) {
+            $event.stopPropagation();
+          }
+          $uibModalStack.dismiss(openedModal.key);
+        }
+      });*/
 
       $rootScope.footer = {
         year: new Date().getFullYear(),
@@ -106,20 +153,19 @@
       };
 
       // before window closes
-      $window.onbeforeunload = function () {};
+      $window.onbeforeunload = function() {};
 
-      $transitions.onStart({}, function (trans) {
+      $transitions.onStart({}, function(trans) {
         // check here if user is authenticated and redirect if he's not
         // var data = trans.to().data;
         // if (data && data.needsAuth && false) {}
-        var progressBar = trans.injector().get('progressBar');
+        var progressBar = trans.injector().get("progressBar");
         progressBar.transitionStart();
         trans.promise.finally(progressBar.transitionEnd);
       });
 
-      $transitions.onSuccess({}, function () {
+      $transitions.onSuccess({}, function() {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
-
     });
 })();

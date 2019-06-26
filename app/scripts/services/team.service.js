@@ -5,9 +5,9 @@
         .module('app.team', [])
         .service('TeamService', TeamService);
 
-    TeamService.$inject = ['$http', 'env', '$stateParams', '$uibModal', '$log'];
+    TeamService.$inject = ['$http', 'env', '$stateParams', '$uibModal', '$log', '$state'];
 
-    function TeamService($http, env, $stateParams, $uibModal, $log) {
+    function TeamService($http, env, $stateParams, $uibModal, $log, $state) {
         var service = this;
 
         service.selectedTeam = {};
@@ -57,10 +57,18 @@
                         $scope.cancel = function() {
                             service.modal.close();
                         };
+                        $scope.openTeamPage = function(team) {
+                            service.modal.close();
+                            $state.go("team", {
+                                teamId: team.id
+                            });
+                        }
                     }
                 });
                 service.modal.result.then(function () {
-                    alert("now I'll close the modal");
+                    console.log($log);
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
                 });
             }   
 
