@@ -21,7 +21,7 @@
         service.modal = {};
 
         function getTeamStats(team) {
-            return $http.get(env.apiUrl + 'teams/' + team, { headers: { 'X-Auth-Token': env.apiKey } });
+            return $http.get(env.apiUrl + 'teams/' + team.id, { headers: { 'X-Auth-Token': env.apiKey } });
         }
 
         /*function getTeamPlayers(team_href) {
@@ -40,34 +40,29 @@
                 .then(function(result){
                     // console.log(result.data);
                     service.selectedTeam = result.data;
+                    console.log(service.selectedTeam);
+                    populateModal();
+                    
                 });
-            
-                
+            function populateModal() {
                 service.modal = $uibModal.open({
                     animation: true,
                     templateUrl: '../../views/team-modal.html',
-                    controller: 'TeamCtrl',
-                    controllerAs: 'vm',
+                    // controller: 'TeamCtrl',
+                    // controllerAs: 'vm',
                     size: 'lg',
-                    resolve: {
-                        team: function () {
-                            return service.selectedTeam
-                        }
-                    }
-                    /*
                     controller: function($scope) {
-                        // $scope.sortType = 'date';
-                        // $scope.sortReverse = true;
-                        $scope.team = 
-                        //$scope.team_matches = service.team_matches;
+                        $scope.team = service.selectedTeam;
+                        // $scope.team_players = service.team_players;
                         $scope.cancel = function() {
                             service.modal.close();
                         };
-                    }*/
+                    }
                 });
                 service.modal.result.then(function () {
                     alert("now I'll close the modal");
                 });
+            }   
 
             /*
             service.modal = $uibModal.open({

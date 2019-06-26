@@ -37,7 +37,7 @@
 
         function openTeamModal(team) {
             // console.log(team.id);
-            TeamService.openModalTeam(team.id);
+            TeamService.openModalTeam(team);
 
             
         }
