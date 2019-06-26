@@ -5,10 +5,115 @@
         .module('app.team', [])
         .service('TeamService', TeamService);
 
-    TeamService.$inject = ['$http', 'env', '$stateParams', '$uibModal'];
+    TeamService.$inject = ['$http', 'env', '$stateParams', '$uibModal', '$log'];
 
-    function TeamService($http, env, $stateParams, $uibModal) {
+    function TeamService($http, env, $stateParams, $uibModal, $log) {
+        var service = this;
 
+        service.selectedTeam, service.teamStats;
+
+        service.getTeamStats = getTeamStats;
+        // service.getTeamPlayers = getTeamPlayers;
+
+
+        service.openModalTeam = openModalTeam;
+        service.modal = {};
+
+        function getTeamStats(team) {
+            return $http.get(env.apiUrl + 'teams/' + team, { headers: { 'X-Auth-Token': env.apiKey } });
+        }
+
+        /*function getTeamPlayers(team_href) {
+            console.log("Get players");
+            return $http.get(env.apiUrl + team_href + '/players', { headers: { 'X-Auth-Token': env.apiKey } });
+        }*/
+
+        function openModalTeam(team) {
+
+            // get team full stats and players
+
+            // this has the squad
+            // service.selectedTeam = 
+            // console.log(service.selectedTeam);
+            getTeamStats(team)
+                .then(function(result){
+                    console.log(result.data);
+                    service.selectedTeam = result.data;
+                });
+            
+                
+                service.modal = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'app/views/team-modal.html',
+                    controller: 'TeamCtrl',
+                    controllerAs: 'tm',
+                    size: 'lg',
+                    resolve: {
+                        data: function () {
+                            return service.selectedTeam;
+                        }
+                    }
+                    /*
+                    controller: function($scope) {
+                        // $scope.sortType = 'date';
+                        // $scope.sortReverse = true;
+                        $scope.team = 
+                        //$scope.team_matches = service.team_matches;
+                        $scope.cancel = function() {
+                            service.modal.close();
+                        };
+                    }*/
+                });
+                service.modal.result.then(function () {
+                    alert("now I'll close the modal");
+                });
+
+            /*
+            service.modal = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/views/team-modal.html',
+                size: 'lg',
+                controller: function($scope) {
+                    // $scope.sortType = 'date';
+                    // $scope.sortReverse = true;
+                    $scope.team = team;
+                    //$scope.team_matches = service.team_matches;
+                    $scope.cancel = function() {
+                        service.modal.close();
+                    };
+                }
+            });
+            service.modal.result.then(function () {
+                alert("now I'll close the modal");
+            });*/
+            
+            /*
+            getTeamStats(team)
+                .then(function(result){
+                    console.log(result);
+                })
+            
+            getTeamPlayers(team)
+                .then(function(result){
+                    console.log(result)
+                })*/
+
+
+
+            // console.log("Get teams")
+            // console.log(team);
+
+            // service.selectedTeam = $http.get(env.apiUrl + '/teams/' + team, { headers: { 'X-Auth-Token': env.apiKey } });
+            // console.log(service.selectedTeam);
+            // return service.selectedTeam;
+            /*
+            getTeamPlayers(team)
+                .then( function( result ) {
+
+                })
+            }*/
+        }
+        
     }
     /*
     function TeamService($http, env, $stateParams, $uibModal) {

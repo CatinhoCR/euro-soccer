@@ -3,7 +3,11 @@
         <thead>
             <tr>
                 <th>
-                    Pos.
+                    <a ng-click="vm.sortType = 'position'; vm.sortReverse = !vm.sortReverse">
+                        Pos
+                        <i class="fa fa-caret-down" ng-if="!vm.sortReverse"></i>
+                        <i class="fa fa-caret-up" ng-if="vm.sortReverse"></i>
+                    </a>
                 </th>
                 <th colspan="2">
                     Team
@@ -27,14 +31,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="table in vm.standings">
+            <tr ng-repeat="table in vm.standing | orderBy:vm.sortType:vm.sortReverse">
                 <td>
                     {{table.position}}
                 </td>
                 <td>
                     <img width="40px" ng-src="{{table.team.crestUrl}}" alt="">
                 </td>
-                <td>{{table.team.name}}</td>
+                <td>
+                    <a ng-click="vm.openTeamModal(table.team)">
+                        {{table.team.name}}
+                    </a>
+                </td>
                 <td>{{table.playedGames}}</td>
                 <td>{{table.won}}</td>
                 <td>{{table.draw}}</td>
@@ -46,4 +54,5 @@
             </tr>
         </tbody>
     </table>
+    
 </div>

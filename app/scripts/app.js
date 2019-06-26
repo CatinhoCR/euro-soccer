@@ -9,7 +9,6 @@
       "ngSanitize",
       "ui.router",
       "angular-loading-bar",
-      "ngAnimate",
       "cfp.loadingBar",
       "moment-picker",
       "chart.js",

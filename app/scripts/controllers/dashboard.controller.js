@@ -21,7 +21,7 @@
 
         function handleSuccess(result) {
           vm.leagues = result.data;
-          console.log(vm.leagues);
+          // console.log(vm.leagues);
         }
 
         function handleError(error) {
