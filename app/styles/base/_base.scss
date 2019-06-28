@@ -1,5 +1,58 @@
-a{
-    &:not([href]){
-        cursor: pointer;
+html, body{
+    font-size: 100%;
+    color: $text;
+}
+
+a, p, ul, li{
+    line-height: rem(16);
+    font-size: rem(16);
+}
+
+button {
+    background-color: $text;
+    color: $secondary;
+    transition: all .3s ease-in-out;
+    border: none;
+    &:hover{
+        background-color: $secondary;
+        color: $text;
+    }
+}
+
+a, a:not([href]){
+    cursor: pointer;
+    color: $secondary;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+    &:hover {
+        color: $third;
+    }
+}
+
+button, a {
+    cursor: pointer;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.bg-primary {
+    background-color: $primary !important;
+}
+
+.bg-secondary {
+    background-color: $secondary !important;
+}
+
+h1,h2,h3,h4,h5,h6,p,li,span{
+    color: $text;
+}
+
+ul {
+    list-style-type: none;
+    li {
+
     }
 }

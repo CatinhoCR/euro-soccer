@@ -35,9 +35,9 @@
             console.log("An error occurred while loading leagues",error);
         }
 
-        function openTeamModal(team) {
+        function openTeamModal(team, league) {
             // console.log(team.id);
-            TeamService.openModalTeam(team);
+            TeamService.openModalTeam(team, league);
 
             
         }

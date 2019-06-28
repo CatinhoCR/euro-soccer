@@ -7,14 +7,22 @@
     </div>
 </div> -->
 <div class="row">
-    <div class="col col-md-4 leagues-block card" ng-repeat="league in vm.leagues.competitions ">
+    <div class="col col-md-4" ng-repeat="league in vm.leagues">
+        <div class="leagues-block card">
+            <h2>{{league.name}} <span class="float-right">{{league.area.name}}</span></h2>
+            <ul>
+                <li>
+                    Current Matchday: {{league.currentSeason.currentMatchday}} <span ng-if="!league.currentSeason.currentMatchday">1</span>
+                </li>
+            </ul>
+
+            <p>Start Date: {{league.currentSeason.startDate}}</p>
+            <p>End Date: {{league.currentSeason.endDate}}</p>
+            <a ui-sref="league({leagueId: league.id})" class="pull-right btn btn-default">Details</a>  
+        </div>
         <!-- | filter : search -->
-        <h2>{{league.name}} <span class="float-right">{{league.area.name}}</span></h2>
-        <p>Current Matchday {{league.currentSeason.currentMatchday}}</p>
-        <a ui-sref="league({leagueId: league.id})" class="pull-right btn btn-default">Details</a>  
-        <pre>
-            {{league}}
-        </pre>
+        
+
 
         <!-- <div class="column col-md-3">
             <span class="title">Number of teams</span>

@@ -1,11 +1,112 @@
 <div class="modal-header">
-    <h1>Hola</h1>
+    <h2>
+        <img width="40px" ng-src="{{team.crestUrl}}" alt="">
+        {{team.name}}
+    </h2>
+    <a ng-click="addToFavorites(team)">
+        <i class="fa fa-star"></i>
+        Add to Favorites
+    </a>
+    <h2><span >{{team.area.name}}</span></h2>
 </div>
-<div class="modal-body" id="modal-body">
-    Name: {{team.name}}
-    Venue: {{team.venue}}
-    Colors: {{team.clubColors}}
-    Founded: {{team.founded}}
+<div class="modal-body team-modal" id="modal-body">
+    <div class="row">
+        <div class="col">
+            <h3>Active Competitions</h3>
+            <ul>
+                <!-- Make these links -->
+                <li ng-repeat="comp in team.activeCompetitions">{{comp.name}}</li>
+            </ul>
+        </div>
+        <div class="col">
+            <h3>Information</h3>
+            <ul>
+                <li>Venue: {{team.venue}}</li>
+                <li>Colors: {{team.clubColors}}</li>
+                <li>Founded: {{team.founded}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4>
+                <a ng-click="toggleStats(team.id, 'home')">
+                    Home Stats
+                </a>
+            </h4>
+            <table class="table" ng-if="showHome">
+                <thead>
+                    <th>GP</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th>
+                    <th>Pts</th>
+                </thead>
+                <tbody>
+                    <td>{{homeStats.playedGames}}</td>
+                    <td>{{homeStats.won}}</td>
+                    <td>{{homeStats.draw}}</td>
+                    <td>{{homeStats.lost}}</td>
+                    <td>{{homeStats.goalsFor}}</td>
+                    <td>{{homeStats.goalsAgainst}}</td>
+                    <td>{{homeStats.goalDifference}}</td>
+                    <td>{{homeStats.points}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center">
+                <a ng-click="toggleStats(team.id, 'away')">
+                    Away Stats
+                </a>
+            </h4>
+            <table class="table" ng-if="showAway">
+                <thead>
+                    <th>GP</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th>
+                    <th>Pts</th>
+                </thead>
+                <tbody>
+                    <td>{{awayStats.playedGames}}</td>
+                    <td>{{awayStats.won}}</td>
+                    <td>{{awayStats.draw}}</td>
+                    <td>{{awayStats.lost}}</td>
+                    <td>{{awayStats.goalsFor}}</td>
+                    <td>{{awayStats.goalsAgainst}}</td>
+                    <td>{{awayStats.goalDifference}}</td>
+                    <td>{{awayStats.points}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="row squad">
+        <div class="col-12">
+            <h4 class="text-center">Squad</h4>
+        </div>
+        <div class="col-md-4" ng-repeat="player in team.squad">
+            <div class="card player-block">
+                <p>{{player.name}}</p>
+                <p>{{player.position}}</p>
+                <p>{{player.shirtNumber}}</p>
+                <p>{{player.nationality}}</p>
+                <!-- <p>{{player.age}}</p> -->
+            </div>
+        </div>
+    </div>
+    
+    
+    
     
     <!-- ui-sref="team({teamId: team.id})" -->
     <a ng-click="openTeamPage(team)">

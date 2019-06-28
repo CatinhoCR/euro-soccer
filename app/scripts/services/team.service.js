@@ -15,13 +15,36 @@
 
         service.getTeamStats = getTeamStats;
         // service.getTeamPlayers = getTeamPlayers;
+        service.homeTeamStats = homeTeamStats;
+        service.awayTeamStats = awayTeamStats;
 
-
+        service.homeStats = {};
+        service.awayStats = {};
         service.openModalTeam = openModalTeam;
         service.modal = {};
 
+        service.addFavoriteTeam = addFavoriteTeam;
+        service.favoriteTeams = [];
+
         function getTeamStats(team) {
             return $http.get(env.apiUrl + 'teams/' + team.id, { headers: { 'X-Auth-Token': env.apiKey } });
+        }
+
+        //https://api.football-data.org/v2/competitions/2021/standings?standingType=HOME
+        // http://api.football-data.org/v2/teams/81/matches
+        function awayTeamStats(league) {
+            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=AWAY', { headers: { 'X-Auth-Token': env.apiKey } });
+        }
+
+        function homeTeamStats(league) {
+            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=HOME', { headers: { 'X-Auth-Token': env.apiKey } });
+        }
+
+        function addFavoriteTeam(team) {
+            
+            service.favoriteTeams.push(team);
+            console.log(service.favoriteTeams);
+
         }
 
         /*function getTeamPlayers(team_href) {
@@ -29,18 +52,18 @@
             return $http.get(env.apiUrl + team_href + '/players', { headers: { 'X-Auth-Token': env.apiKey } });
         }*/
 
-        function openModalTeam(team) {
+        function openModalTeam(team, league) {
 
             // get team full stats and players
 
             // this has the squad
             // service.selectedTeam = 
             // console.log(service.selectedTeam);
+            
             getTeamStats(team)
                 .then(function(result){
                     // console.log(result.data);
                     service.selectedTeam = result.data;
-                    console.log(service.selectedTeam);
                     populateModal();
                     
                 });
@@ -52,8 +75,60 @@
                     // controllerAs: 'vm',
                     size: 'lg',
                     controller: function($scope) {
+                        $scope.table = [];
+                        $scope.homeStats = {};
+                        $scope.awayStats = {};
+                        $scope.showHome = false;
+                        $scope.showAway = false;
                         $scope.team = service.selectedTeam;
-                        // $scope.team_players = service.team_players;
+                        $scope.toggleStats = function(team, type) {
+                            console.log($scope.homeStats);
+                            console.log($scope.awayStats);
+                            // if ( $scope.homeStats.team ) {
+                                
+                                if ( type === 'home'  ) {
+                                    // && $scope.homeStats.team.id != $scope.team.id
+                                    $scope.showHome = !$scope.showHome;
+                                    $scope.showAway = false; 
+                                    // console.log(service.homeTeamStats);
+                                    service.homeTeamStats(league)
+                                        .then(function(result){
+                                            $scope.table = result.data.standings[0].table;
+                                            for ( var i = 0; i < $scope.table.length; i++ ) {
+                                                if ( $scope.table[i].team.id == $scope.team.id ) {
+                                                    $scope.homeStats = $scope.table[i];
+                                                    break;
+                                                }
+                                            }
+                                            service.homeStats = $scope.homeStats;
+                                        })
+                                }
+                            // }
+                            // if ( $scope.awayStats.team ) {
+                                if (type === 'away' ) {
+                                    // && $scope.awayStats.team.id != $scope.team.id
+                                    $scope.showAway = !$scope.showAway;
+                                    $scope.showHome = false;
+                                    service.awayTeamStats(league)
+                                        .then(function(result){
+                                            $scope.table = result.data.standings[0].table;
+                                            for ( var i = 0; i < $scope.table.length; i++ ) {
+                                                if ( $scope.table[i].team.id == $scope.team.id ) {
+                                                    $scope.awayStats = $scope.table[i];
+                                                    break;
+                                                }
+                                            }
+                                            service.awayStats = $scope.awayStats;
+                                        })
+                                }
+                            // }
+                            
+                        };
+
+                        $scope.addToFavorites = function(team) {
+                            service.addFavoriteTeam(team);
+                        }
+
                         $scope.cancel = function() {
                             service.modal.close();
                         };

@@ -10,6 +10,13 @@
     function TeamCtrl(TeamService, $stateParams, $state, $location) {
         var vm = this;
         vm.team = {};
+        /*
+        vm.showHomeStats = false;
+        vm.showAwayStats = false;
+        vm.toggleHomeStats = toggleHomeStats;
+        vm.toggleAwayStats = toggleAwayStats;
+        */
+        // vm.homeStats = 
         
         vm.openModalTeam = openModalTeam;
 
@@ -25,6 +32,20 @@
             // console.log(team);
             vm.team = TeamService.openModalTeam(team);
         }
+
+        function addFavorite() {
+            
+        }
+
+        /*
+        function toggleHomeStats(team) {
+            vm.showHomeStats = !vm.showHomeStats;
+            console.log(TeamService.awayTeamStats(team));
+        }
+
+        function toggleAwayStats(team) {
+
+        }*/
 
         
     }

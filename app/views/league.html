@@ -39,7 +39,8 @@
                     <img width="40px" ng-src="{{table.team.crestUrl}}" alt="">
                 </td>
                 <td>
-                    <a ng-click="vm.openTeamModal(table.team)">
+                    <a ng-click="vm.openTeamModal(table.team, vm.league_details.competition.id)">
+                        
                         {{table.team.name}}
                     </a>
                 </td>

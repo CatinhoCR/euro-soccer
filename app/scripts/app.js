@@ -18,7 +18,8 @@
       "app.dashboard",
       "app.league",
       "app.team",
-      "app.match"
+      "app.match",
+      "app.favorites"
     ])
     .constant("constants", {
       url: "https://api.football-data.org/v2/",
@@ -114,7 +115,7 @@
           views: {
             content: {
               templateUrl: "views/favorites.html",
-              controller: "TeamCtrl",
+              controller: "FavoritesCtrl",
               controllerAs: "vm"
             }
           },

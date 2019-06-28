@@ -11,6 +11,7 @@
         var vm = this;
         vm.leagues = [];
 
+
         activate(DashboardService);
 
         function activate() {
@@ -20,8 +21,14 @@
         }
 
         function handleSuccess(result) {
-          vm.leagues = result.data;
-          // console.log(vm.leagues);
+          vm.leagues = result.data.competitions;
+          console.log(vm.leagues);
+          // Can't figure out a way to get multiple results with 1 query here.. need this to calculate total matches, etc since API v2 changed those.
+          /*
+          for ( var i = 0; i < vm.leagues.count; i++ ) {
+            DashboardService.getLeagueTeams(vm.leagues.competitions[i].id)
+          }
+          */
         }
 
         function handleError(error) {
