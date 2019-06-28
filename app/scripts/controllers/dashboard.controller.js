@@ -4,21 +4,23 @@
     angular
         .module('app.dashboard')
         .controller('DashboardCtrl', DashboardCtrl);
-
     DashboardCtrl.$inject = ['DashboardService', '$stateParams'];
 
     function DashboardCtrl(DashboardService, $stateParams) {
         var vm = this;
         vm.leagues = [];
-
-
-        activate(DashboardService);
+        vm.WC = {};
+        vm.loadWC = loadWC;
+        vm.showWC = false;
+        vm.sortType = 'id';
+        vm.sortReverse = false;
 
         function activate() {
             DashboardService.getLeagues()
                 .then(handleSuccess)
                 .catch(handleError);
         }
+        activate(DashboardService);
 
         function handleSuccess(result) {
           vm.leagues = result.data.competitions;
@@ -34,6 +36,18 @@
         function handleError(error) {
             console.log("An error occurred while loading leagues",error);
         }
-    }
 
+        function loadWC() {
+            if( !vm.WC.competition ) {
+                DashboardService.getWorldCup()
+                .then(function(result){
+                    vm.WC = result.data;
+                    vm.showWC = true;
+                    console.log(vm.WC)
+                })
+            } else {
+                vm.showWC = !vm.showWC;
+            }
+        }
+    }
 })();

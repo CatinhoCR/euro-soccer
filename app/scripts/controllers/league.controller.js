@@ -25,10 +25,14 @@
         }
 
         function handleLeagueSuccess(result) {
+            console.log(result.data);
             vm.league_details = result.data;
             // console.log(vm.league_details);
-            vm.standing = result.data.standings[0].table;
-            // console.log(vm.standing);
+            if( vm.league_details.standings[0].table ) {
+                vm.standing = vm.league_details.standings[0].table;
+            }
+            
+            console.log(vm.standing);
         }
 
         function handleLeagueError(error) {

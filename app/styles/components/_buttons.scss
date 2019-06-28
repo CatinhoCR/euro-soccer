@@ -1,3 +1,13 @@
-.btn{
-    
+button, .btn{
+    background-color: $text;
+    color: $secondary;
+    transition: all .3s ease-in-out;
+    border: none;
+    &:hover{
+        background-color: $secondary;
+        color: $text;
+    }
+    &.btn-brand {
+
+    }
 }

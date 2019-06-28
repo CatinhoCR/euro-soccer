@@ -1,0 +1,28 @@
+.navbar {
+    height: rem(80);
+    position: relative;
+    z-index: 2;
+    .navbar-brand {
+        color: #fff;
+    }
+    ul {
+        li {
+            &.nav-item {
+                a {
+                    color: #fff;
+                    &:hover{
+                        color: $thirdV;
+                    }
+                }
+                &.active {
+                    a {
+                        color: $secondary;
+                        &:hover{
+                            color: $thirdV;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

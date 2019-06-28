@@ -1,1 +1,38 @@
-Favs
+<div class="row">
+    <div class="col col-md-6" ng-repeat="team in vm.favoriteTeams">
+        <div class="favorites-block card">
+            <h2>{{team.name}}
+                <span class="float-right">{{team.area.name}}</span>
+            </h2>
+
+
+            <div class="row">
+                <div class="col">
+                    <h3>Active Competitions</h3>
+                    <ul>
+                        <!-- Make these links -->
+                        <li ng-repeat="comp in team.activeCompetitions">{{comp.name}}</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Information</h3>
+                    <ul>
+                        <li>Venue: {{team.venue}}</li>
+                        <li>Colors: {{team.clubColors}}</li>
+                        <li>Founded: {{team.founded}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <!-- ui-sref="team({teamId: team.id})" -->
+                    <!-- <a ng-click="openTeamPage(team)">
+                        See Team Matches
+                    </a> -->
+                    <!-- <a ui-sref="league({leagueId: league.id})" class="pull-right btn btn-default">Details</a>   -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

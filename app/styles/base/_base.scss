@@ -1,25 +1,32 @@
-html, body{
+html,
+body {
     font-size: 100%;
     color: $text;
+    height: 100%;
 }
 
-a, p, ul, li{
+// body {
+//     position: relative;
+// }
+
+// #loading-bar .bar {
+//     position: relative;
+// }
+
+.content-wrapper {
+    background-color: #eee;
+}
+
+a,
+p,
+ul,
+li {
     line-height: rem(16);
     font-size: rem(16);
 }
 
-button {
-    background-color: $text;
-    color: $secondary;
-    transition: all .3s ease-in-out;
-    border: none;
-    &:hover{
-        background-color: $secondary;
-        color: $text;
-    }
-}
-
-a, a:not([href]){
+a,
+a:not([href]) {
     cursor: pointer;
     color: $secondary;
     text-decoration: none;
@@ -29,7 +36,8 @@ a, a:not([href]){
     }
 }
 
-button, a {
+button,
+a {
     cursor: pointer;
 }
 
@@ -46,13 +54,19 @@ ul {
     background-color: $secondary !important;
 }
 
-h1,h2,h3,h4,h5,h6,p,li,span{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+span {
     color: $text;
 }
 
 ul {
     list-style-type: none;
-    li {
-
-    }
+    li {}
 }

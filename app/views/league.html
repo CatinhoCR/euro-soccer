@@ -1,33 +1,67 @@
-<div>
+<div class="content-wrapper">
     <table class="table">
         <thead>
             <tr>
                 <th>
                     <a ng-click="vm.sortType = 'position'; vm.sortReverse = !vm.sortReverse">
                         Pos
-                        <i class="fa fa-caret-down" ng-if="!vm.sortReverse"></i>
-                        <i class="fa fa-caret-up" ng-if="vm.sortReverse"></i>
+                        <i class="fa fa-caret-down" ng-if="vm.sortType === 'position' && !vm.sortReverse"></i>
+                        <i class="fa fa-caret-up" ng-if="vm.sortType === 'position' && vm.sortReverse"></i>
                     </a>
                 </th>
                 <th colspan="2">
-                    Team
+                    <a >
+                        Team
+                    </a>
                 </th>
                 <th>
-                    GP
+                    <a ng-click="vm.sortType = 'playedGames'; vm.sortReverse = !vm.sortReverse">
+                        GP
+                        <i class="fa fa-caret-down" ng-if="vm.sortType === 'playedGames' && !vm.sortReverse"></i>
+                        <i class="fa fa-caret-up" ng-if="vm.sortType === 'playedGames' && vm.sortReverse"></i>
+                    </a>
                 </th>
                 <th>
-                    W
+                    <a >
+                        W
+                    </a>
                 </th>
                 <th>
-                    D
+                    <a >
+                        D
+                    </a>
                 </th>
                 <th>
-                    L
+                    <a >
+                        L
+                    </a>
                 </th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GD</th>
-                <th>Pts</th>
+                <th>
+                    <a ng-click="vm.sortType = 'goalsFor'; vm.sortReverse = !vm.sortReverse">
+                        GF
+                        <i class="fa fa-caret-down" ng-if="vm.sortType === 'goalsFor' && !vm.sortReverse"></i>
+                        <i class="fa fa-caret-up" ng-if="vm.sortType === 'goalsFor' && vm.sortReverse"></i>
+                    </a>
+                </th>
+                <th>
+                    <a ng-click="vm.sortType = 'goalsAgainst'; vm.sortReverse = !vm.sortReverse">
+                        GA
+                        <i class="fa fa-caret-down" ng-if="vm.sortType === 'goalsAgainst' && !vm.sortReverse"></i>
+                        <i class="fa fa-caret-up" ng-if="vm.sortType === 'goalsAgainst' && vm.sortReverse"></i>
+                    </a>
+                </th>
+                <th>
+                    <a ng-click="vm.sortType = 'goalDifference'; vm.sortReverse = !vm.sortReverse">
+                        GD
+                        <i class="fa fa-caret-down" ng-if="vm.sortType === 'goalDifference' && !vm.sortReverse"></i>
+                        <i class="fa fa-caret-up" ng-if="vm.sortType === 'goalDifference' && vm.sortReverse"></i>
+                    </a>
+                </th>
+                <th>
+                    <a >
+                        Pts
+                    </a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -40,7 +74,7 @@
                 </td>
                 <td>
                     <a ng-click="vm.openTeamModal(table.team, vm.league_details.competition.id)">
-                        
+
                         {{table.team.name}}
                     </a>
                 </td>
@@ -55,5 +89,5 @@
             </tr>
         </tbody>
     </table>
-    
+
 </div>

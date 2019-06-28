@@ -29,7 +29,8 @@
 </head>
 
 <body ng-app="angularjs-starter">
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark py-3" ng-controller="HeaderController">
+  <div id="loading-bar-container"></div>
+  <nav class="navbar navbar-expand-md bg-dark py-3" ng-controller="HeaderController">
     <div class="container">
       <a class="navbar-brand" ui-sref="main">
         <img src="images/icon.png" width="30" height="30" class="d-inline-block align-top" alt="Euro Soccer Now"> Euro Soccer Now
@@ -49,6 +50,10 @@
             <a class="nav-link" ui-sref="main">Dashboard</a>
             <!-- <span class="sr-only">(current)</span> -->
           </li>
+          <li class="nav-item" ui-sref-active="active">
+            <a class="nav-link" ui-sref="favorite-teams">Favorite Teams</a>
+            <!-- <span class="sr-only">(current)</span> -->
+          </li>
           <!-- <li class="nav-item" ui-sref-active="active">
             <a class="nav-link" ui-sref="about">About</a>
           </li> -->
@@ -57,26 +62,15 @@
     </div>
   </nav>
 
-  <main role="main" ui-view="content" class="container"></main>
+  <main role="main"  class="page-background">
+    <div class="container site-container" ui-view="content">
+
+    </div>
+  </main>
 
   <!--Footer-->
-  <footer class="page-footer text-center text-md-left font-small blue pt-4 mt-4">
-    <!--Footer Links-->
-    <div class="container text-center text-md-left">
-      <div class="row">
-
-        <!--First column-->
-        <div class="col-md-6 pb-3">
-          <h5 class="text-uppercase">CATO</h5>
-          <!-- <p>{{footer.version}}</p> -->
-        </div>
-        <!--/.First column-->
-      </div>
-    </div>
-    <!--/.Footer Links-->
-
-    <!--Copyright-->
-    <div class="footer-copyright py-3 text-center">
+  <footer class="bg-dark py-3 text-center">
+    <div >
       © {{footer.year}} Copyright
       <a href="#" target="_blank"> Andrés Castillo</a>.
     </div>

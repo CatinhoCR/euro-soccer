@@ -1,0 +1,21 @@
+.table {
+    thead{
+
+    }
+    tbody{
+        tr {
+        
+            &:nth-child(even) {
+                background-color: #ddd;
+            }
+            &:hover {
+                background-color: #ccc;
+            }
+        }
+    }
+    
+    th, td {
+        vertical-align: middle;
+
+    }
+}

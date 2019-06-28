@@ -5,11 +5,17 @@
         .module('app.favorites', [])
         .service('FavoritesService', FavoritesService);
 
-    FavoritesService.$inject = ['$http', 'env', '$stateParams'];
+    FavoritesService.$inject = ['$http', 'env', '$stateParams', 'TeamService'];
 
-    function FavoritesService($http, env, $stateParams) {
+    function FavoritesService($http, env, $stateParams, TeamService) {
         var service = this;
+        service.teams = [];
+        service.getFavoriteTeams = getFavoriteTeams;
 
+        function getFavoriteTeams() {
+            return TeamService.getFavoriteTeams;
+            // console.log(service.teams);
+        }
         /*
         service.getTeamDetails = getTeamDetails;
         

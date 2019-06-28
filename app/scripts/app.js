@@ -61,8 +61,10 @@
     .config([
       "cfpLoadingBarProvider",
       function(cfpLoadingBarProvider) {
-        cfpLoadingBarProvider.includeSpinner = false;
-        cfpLoadingBarProvider.latencyThreshold = 500;
+        cfpLoadingBarProvider.includeSpinner = true;
+        cfpLoadingBarProvider.latencyThreshold = 1000;
+        //cfpLoadingBarProvider.parentSelector = '#loading-bar-container';
+        // cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Loading...</div>';
       }
     ])
     .config(function($urlRouterProvider, $stateProvider) {

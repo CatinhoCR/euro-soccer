@@ -1,46 +1,50 @@
-<!-- <div class="row">
-    <div class="col-md-3 pull-left">
-        <span class="section_title">Dashboard</span>
-    </div>
-    <div class="col-md-3 pull-right">
-        <input type="text" ng-model="search" class="form-control search" placeholder="Search">
-    </div>
-</div> -->
 <div class="row">
-    <div class="col col-md-4" ng-repeat="league in vm.leagues">
+    <div class="col col-lg-6 ">
+        <div class="card">
+            <h1 class="">Dashboard - European Leagues</h1>
+            <form class="">
+                <input type="text" placeholder="Search leagues" class="form-control search" ng-model="searchLeague">
+            </form>
+            <p></p>
+            <button ng-click="vm.loadWC()" class="btn btn-brand">
+                Load Sample Group Competition
+            </button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col col-md-4" ng-if="vm.showWC">
         <div class="leagues-block card">
-            <h2>{{league.name}} <span class="float-right">{{league.area.name}}</span></h2>
+            <h2>{{vm.WC.competition.name}}
+                <span class="float-right">{{vm.WC.competition.area.name}}</span>
+            </h2>
             <ul>
                 <li>
-                    Current Matchday: {{league.currentSeason.currentMatchday}} <span ng-if="!league.currentSeason.currentMatchday">1</span>
+                    Current Matchday: {{vm.WC.season.currentMatchday}}
+                    <span ng-if="!vm.WC.season.currentMatchday">1</span>
                 </li>
+                <li>Start Date: {{vm.WC.season.startDate}}</li>
+                <li>End Date: {{vm.WC.season.endDate}}</li>
+                <li>Winner: {{vm.WC.season.winner.name}}</li>
             </ul>
-
-            <p>Start Date: {{league.currentSeason.startDate}}</p>
-            <p>End Date: {{league.currentSeason.endDate}}</p>
-            <a ui-sref="league({leagueId: league.id})" class="pull-right btn btn-default">Details</a>  
+            <a ui-sref="league({leagueId: vm.WC.competition.id})" class="btn btn-brand">Details</a>
+        </div>
+    </div>
+    <div class="col col-md-4" ng-repeat="league in vm.leagues | orderBy:vm.sortType:vm.sortReverse | filter:searchLeague">
+        <div class="leagues-block card">
+            <h2>{{league.name}}
+                <span class="float-right">{{league.area.name}}</span>
+            </h2>
+            <ul>
+                <li>
+                    Current Matchday: {{league.currentSeason.currentMatchday}}
+                    <span ng-if="!league.currentSeason.currentMatchday">1</span>
+                </li>
+                <li>Start Date: {{league.currentSeason.startDate}}</li>
+                <li>End Date: {{league.currentSeason.endDate}}</li>
+            </ul>
+            <a ui-sref="league({leagueId: league.id})" class="btn btn-brand">Details</a>
         </div>
         <!-- | filter : search -->
-        
-
-
-        <!-- <div class="column col-md-3">
-            <span class="title">Number of teams</span>
-            <span class="text">{{league.numberOfTeams}}</span>
-        </div>
-        <div class="column col-md-3">
-            <span class="title">Current match day</span>
-            <span class="text">{{league.currentMatchday}}</span>
-        </div>
-        <div class="column col-md-3">
-            <span class="title">Total match days</span>
-            <span class="text">{{league.numberOfMatchdays}}</span>
-        </div>
-        <div class="column col-md-3">
-            <span class="title">Total games</span>
-            <span class="text">{{league.numberOfGames}}</span>
-           <a ui-sref="league({leagueId: league.id})" class="pull-right btn btn-default">Details</a>   
-        </div> -->
-  
     </div>
 </div>

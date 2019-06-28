@@ -24,6 +24,7 @@
         service.modal = {};
 
         service.addFavoriteTeam = addFavoriteTeam;
+        service.getFavoriteTeams = getFavoriteTeams
         service.favoriteTeams = [];
 
         function getTeamStats(team) {
@@ -43,8 +44,12 @@
         function addFavoriteTeam(team) {
             
             service.favoriteTeams.push(team);
-            console.log(service.favoriteTeams);
+            // console.log(service.favoriteTeams);
 
+        }
+
+        function getFavoriteTeams() {
+            return service.favoriteTeams;
         }
 
         /*function getTeamPlayers(team_href) {
