@@ -3,7 +3,8 @@
         <img width="40px" ng-src="{{team.crestUrl}}" alt="">
         {{team.name}}
     </h2>
-    <a ng-click="addToFavorites(team)">
+    
+    <a ng-click="addToFavorites(team, league, leagueName)">
         <i class="fa fa-star"></i>
         Add to Favorites
     </a>
@@ -28,13 +29,15 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            <h4>
-                <a ng-click="toggleStats(team.id, 'home')">
-                    Home Stats
-                </a>
+        <div class="col py-5">
+            <h4 class="text-center">
+                <!-- <a > -->
+                    <!-- ng-click="toggleStats(team.id, 'home')" -->
+                Home Stats
+                <!-- </a> -->
             </h4>
-            <table class="table" ng-if="showHome">
+            <table class="table py-3" >
+                <!-- ng-if="showHome" -->
                 <thead>
                     <th>GP</th>
                     <th>W</th>
@@ -60,12 +63,9 @@
     </div>
     <div class="row">
         <div class="col">
-            <h4 class="text-center">
-                <a ng-click="toggleStats(team.id, 'away')">
-                    Away Stats
-                </a>
-            </h4>
-            <table class="table" ng-if="showAway">
+            <h4 class="text-center ">Away Stats</h4>
+            <table class="table py-3" >
+                <!-- ng-if="showAway" -->
                 <thead>
                     <th>GP</th>
                     <th>W</th>
@@ -87,10 +87,17 @@
                     <td>{{awayStats.points}}</td>
                 </tbody>
             </table>
+              <!-- ui-sref="team({teamId: team.id})" -->
+              <div class="text-center">
+                    <button class="btn btn-brand" ng-click="openTeamPage(team)">
+                        See Team Matches
+                    </button>
+              </div>
+            
         </div>
     </div>
     
-    <div class="row squad">
+    <div class="row squad pt-5">
         <div class="col-12">
             <h4 class="text-center">Squad</h4>
         </div>
@@ -108,10 +115,7 @@
     
     
     
-    <!-- ui-sref="team({teamId: team.id})" -->
-    <a ng-click="openTeamPage(team)">
-        See Team Matches
-    </a>
+    
 </div>
 <div class="modal-footer">
     

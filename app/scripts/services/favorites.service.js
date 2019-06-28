@@ -14,7 +14,7 @@
 
         function getFavoriteTeams() {
             return TeamService.getFavoriteTeams;
-            // console.log(service.teams);
+            console.log(service.teams);
         }
         /*
         service.getTeamDetails = getTeamDetails;

@@ -18,7 +18,7 @@
 
         function activate() {
             vm.favoriteTeams = TeamService.getFavoriteTeams()
-            console.log("A");
+            console.log(vm.favoriteTeams);
         }
 
         /*

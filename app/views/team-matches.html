@@ -1,3 +1,25 @@
-<div ng-repeat="match in vm.teamDetails.matches">
-    <p>{{match.competition.name}}</p>
+<div class="content-wrapper">
+	<div class="row">
+		<div class="col-lg-10 offset-lg-1" ng-repeat="match in vm.teamDetails.matches">
+			<div class="card match-block">
+				<h4 class="text-center">{{match.competition.name}}</h4>
+				<h5 class="text-center" ng-if="match.group != ''">{{match.group}}</h5>
+				<div class="score-block clearfix">
+					<div class="home-team">
+						<h6>{{match.homeTeam.name}}</h6>
+						<span>{{match.score.fullTime.homeTeam}}</span>
+					</div>
+					<div class="separator text-center">
+						<span>-</span>
+					</div>
+					<div class="away-team">
+						<span>{{match.score.fullTime.awayTeam}}</span>
+						<h6>{{match.awayTeam.name}}</h6>
+					</div>
+				</div>
+				<p class="text-center">{{match.utcDate | amUtc | amLocal | amDateFormat:'MM/DD/YYYY - HH:mm'}}</p>
+				<p class="text-center">{{match.status}}</p>
+			</div>
+		</div>
+	</div>
 </div>

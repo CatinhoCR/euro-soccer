@@ -13,10 +13,6 @@ body {
 //     position: relative;
 // }
 
-.content-wrapper {
-    background-color: #eee;
-}
-
 a,
 p,
 ul,
@@ -69,4 +65,8 @@ span {
 ul {
     list-style-type: none;
     li {}
+}
+
+.team-logo{
+    width: 60px;
 }

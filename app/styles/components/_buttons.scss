@@ -1,11 +1,11 @@
-button, .btn{
+button, a.btn, .btn{
     background-color: $text;
-    color: $secondary;
+    color: $secondary!important;
     transition: all .3s ease-in-out;
     border: none;
     &:hover{
         background-color: $secondary;
-        color: $text;
+        color: $text!important;
     }
     &.btn-brand {
 

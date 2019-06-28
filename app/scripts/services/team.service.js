@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -27,6 +27,8 @@
         service.getFavoriteTeams = getFavoriteTeams
         service.favoriteTeams = [];
 
+        service.opened = false;
+
         function getTeamStats(team) {
             return $http.get(env.apiUrl + 'teams/' + team.id, { headers: { 'X-Auth-Token': env.apiKey } });
         }
@@ -42,7 +44,7 @@
         }
 
         function addFavoriteTeam(team) {
-            
+
             service.favoriteTeams.push(team);
             // console.log(service.favoriteTeams);
 
@@ -57,87 +59,135 @@
             return $http.get(env.apiUrl + team_href + '/players', { headers: { 'X-Auth-Token': env.apiKey } });
         }*/
 
-        function openModalTeam(team, league) {
+        function openModalTeam(team, league, leagueName) {
 
             // get team full stats and players
 
             // this has the squad
             // service.selectedTeam = 
             // console.log(service.selectedTeam);
-            
+
             getTeamStats(team)
-                .then(function(result){
+                .then(function (result) {
                     // console.log(result.data);
                     service.selectedTeam = result.data;
                     populateModal();
-                    
+
                 });
+                
             function populateModal() {
+                if ( service.opened ){
+                    return;
+                };
                 service.modal = $uibModal.open({
+                    
                     animation: true,
                     templateUrl: '../../views/team-modal.html',
                     // controller: 'TeamCtrl',
                     // controllerAs: 'vm',
                     size: 'lg',
-                    controller: function($scope) {
+                    backdrop: true,
+                    controller: function ($scope) {
                         $scope.table = [];
                         $scope.homeStats = {};
                         $scope.awayStats = {};
                         $scope.showHome = false;
                         $scope.showAway = false;
                         $scope.team = service.selectedTeam;
-                        $scope.toggleStats = function(team, type) {
-                            console.log($scope.homeStats);
-                            console.log($scope.awayStats);
-                            // if ( $scope.homeStats.team ) {
-                                
-                                if ( type === 'home'  ) {
-                                    // && $scope.homeStats.team.id != $scope.team.id
-                                    $scope.showHome = !$scope.showHome;
-                                    $scope.showAway = false; 
-                                    // console.log(service.homeTeamStats);
-                                    service.homeTeamStats(league)
-                                        .then(function(result){
-                                            $scope.table = result.data.standings[0].table;
-                                            for ( var i = 0; i < $scope.table.length; i++ ) {
-                                                if ( $scope.table[i].team.id == $scope.team.id ) {
-                                                    $scope.homeStats = $scope.table[i];
-                                                    break;
-                                                }
-                                            }
-                                            service.homeStats = $scope.homeStats;
-                                        })
+                        $scope.league = league;
+                        $scope.leagueName = leagueName;
+                        // console.log($scope.team);
+                        service.homeTeamStats(league)
+                            .then(function (result) {
+                                $scope.table = result.data.standings[0].table;
+                                for (var i = 0; i < $scope.table.length; i++) {
+                                    if ($scope.table[i].team.id == $scope.team.id) {
+                                        $scope.homeStats = $scope.table[i];
+                                        break;
+                                    }
                                 }
-                            // }
-                            // if ( $scope.awayStats.team ) {
-                                if (type === 'away' ) {
-                                    // && $scope.awayStats.team.id != $scope.team.id
-                                    $scope.showAway = !$scope.showAway;
-                                    $scope.showHome = false;
-                                    service.awayTeamStats(league)
-                                        .then(function(result){
-                                            $scope.table = result.data.standings[0].table;
-                                            for ( var i = 0; i < $scope.table.length; i++ ) {
-                                                if ( $scope.table[i].team.id == $scope.team.id ) {
-                                                    $scope.awayStats = $scope.table[i];
-                                                    break;
-                                                }
-                                            }
-                                            service.awayStats = $scope.awayStats;
-                                        })
+                                service.homeStats = $scope.homeStats;
+                            });
+                        service.awayTeamStats(league)
+                            .then(function (result) {
+                                $scope.table = result.data.standings[0].table;
+                                for (var i = 0; i < $scope.table.length; i++) {
+                                    if ($scope.table[i].team.id == $scope.team.id) {
+                                        $scope.awayStats = $scope.table[i];
+                                        break;
+                                    }
                                 }
-                            // }
-                            
-                        };
+                                service.awayStats = $scope.awayStats;
+                            });
+                        
+                        $scope.addToFavorites = function (team, league, leagueName) {
+                            // 
 
-                        $scope.addToFavorites = function(team) {
-                            service.addFavoriteTeam(team);
+                            var exists = false;
+                            // console.log(team);
+                            // console.log(league);
+                            // console.log(leagueName);
+
+                            team.league = league;
+                            team.leagueName = leagueName;
+                            console.log(team);
+                            console.log(service.favoriteTeams);
+                            // console.log(service.favoriteTeams);
+                            service.favoriteTeams.forEach(function(favorite_team) {
+                                if ( team.name == favorite_team.name ) {
+                                    exists = true; 
+                                }
+                               
+    
+                            });
+                            if (!exists) {
+                                service.addFavoriteTeam(team);
+                                alert("Team added to favorites");
+                            }
+                            
                         }
 
-                        $scope.cancel = function() {
+                        /*
+
+                        var alreadyAdded = false;
+            
+                        team.leagueId = leagueId;
+                        team.leagueName = leagueName;
+                        team.isGroup = isGroup;
+
+                        service.favoriteTeams.forEach(function(favorite_team) {
+                            
+                            if (isGroup) {
+                                if(favorite_team.team == team.team){
+                                alreadyAdded = true;   
+                                }
+                            } else {
+                                if(favorite_team.teamName == team.teamName){
+                                alreadyAdded = true;   
+                                }
+                            }
+
+                        });
+                        if (!alreadyAdded) {
+                            service.favoriteTeams.push(team);
+                            service.modal = $uibModal.open({
+                                animation: true,
+                                templateUrl: 'team/views/modal_confirm.html',
+                                size: 'md',
+                                controller: function($scope) {
+                                    $scope.team = team;
+                                    $scope.cancel = function() {
+                                        service.modal.close();
+                                    };
+                                }
+                            });
+                        }
+                        */
+
+                        $scope.cancel = function () {
                             service.modal.close();
                         };
-                        $scope.openTeamPage = function(team) {
+                        $scope.openTeamPage = function (team) {
                             service.modal.close();
                             $state.go("team", {
                                 teamId: team.id
@@ -145,12 +195,16 @@
                         }
                     }
                 });
+                service.opened = true;
                 service.modal.result.then(function () {
                     console.log($log);
+                    service.opened = false;
+
                 }, function () {
                     $log.info('Modal dismissed at: ' + new Date());
+                    service.opened = false;
                 });
-            }   
+            }
 
             /*
             service.modal = $uibModal.open({
@@ -170,7 +224,7 @@
             service.modal.result.then(function () {
                 alert("now I'll close the modal");
             });*/
-            
+
             /*
             getTeamStats(team)
                 .then(function(result){
@@ -197,7 +251,7 @@
                 })
             }*/
         }
-        
+
     }
     /*
     function TeamService($http, env, $stateParams, $uibModal) {

@@ -22,10 +22,15 @@
     .site-container {
         z-index: 2;
         position: relative;
+        // height: 100%;
+        .content-wrapper {
+            background-color: #eee;
+            height: 100%;
+        }
     }
 }
 
-.leagues-block {
+.leagues-block, .favorites-block {
     ul {
         li {
             margin: rem(8) 0;

@@ -25,23 +25,24 @@
         }
 
         function handleLeagueSuccess(result) {
-            console.log(result.data);
+            // console.log(result.data);
             vm.league_details = result.data;
             // console.log(vm.league_details);
             if( vm.league_details.standings[0].table ) {
                 vm.standing = vm.league_details.standings[0].table;
             }
             
-            console.log(vm.standing);
+            // console.log(vm.standing);
         }
 
         function handleLeagueError(error) {
             console.log("An error occurred while loading leagues",error);
         }
 
-        function openTeamModal(team, league) {
+        function openTeamModal(team, leagueId, leagueName) {
             // console.log(team.id);
-            TeamService.openModalTeam(team, league);
+            // console.log(leagueName);
+            TeamService.openModalTeam(team, leagueId, leagueName);
 
             
         }

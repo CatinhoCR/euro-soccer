@@ -1,14 +1,15 @@
 <div class="row">
     <div class="col col-md-6" ng-repeat="team in vm.favoriteTeams">
         <div class="favorites-block card">
+            <img ng-src="{{team.crestUrl}}" alt="" class="team-logo float-left">
             <h2>{{team.name}}
-                <span class="float-right">{{team.area.name}}</span>
+                <span class="">{{team.area.name}}</span>
             </h2>
 
 
             <div class="row">
                 <div class="col">
-                    <h3>Active Competitions</h3>
+                    <h4>Active Competitions</h4>
                     <ul>
                         <!-- Make these links -->
                         <li ng-repeat="comp in team.activeCompetitions">{{comp.name}}</li>
@@ -26,6 +27,8 @@
 
             <div class="row">
                 <div class="col">
+                    <a ui-sref="league({leagueId: team.league})" class="btn btn-brand">League Details</a>
+                    <a ui-sref="team({teamId: team.id})" class="btn btn-brand">Team Matches</a>
                     <!-- ui-sref="team({teamId: team.id})" -->
                     <!-- <a ng-click="openTeamPage(team)">
                         See Team Matches
