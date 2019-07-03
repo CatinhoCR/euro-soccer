@@ -44,11 +44,19 @@
         //https://api.football-data.org/v2/competitions/2021/standings?standingType=HOME
         // http://api.football-data.org/v2/teams/81/matches
         function awayTeamStats(league) {
-            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=AWAY', { headers: { 'X-Auth-Token': env.apiKey } });
+            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=AWAY&season=2018', { headers: { 'X-Auth-Token': env.apiKey } });
         }
 
         function homeTeamStats(league) {
-            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=HOME', { headers: { 'X-Auth-Token': env.apiKey } });
+            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=HOME&season=2018', { headers: { 'X-Auth-Token': env.apiKey } });
+        }
+
+        function awayTeamStatsLast(league, season) {
+            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=AWAY&season=2018', { headers: { 'X-Auth-Token': env.apiKey } });
+        }
+
+        function homeTeamStatsLast(league, season) {
+            return $http.get(env.apiUrl + 'competitions/' + league + '/standings?standingType=HOME&season=2018', { headers: { 'X-Auth-Token': env.apiKey } });
         }
 
         function addFavoriteTeam(team) {
@@ -123,16 +131,13 @@
                         $scope.league = league;
                         $scope.leagueName = leagueName;
 
-                        service.getTeamPlayers($scope.team);
-                            // .then(function(result){
-                            //     console.log(result);
-                                
-                            //     console.log($scope.teamPlayers)
-                            // })
                         
-                        // console.log($scope.team);
+
+                        service.getTeamPlayers($scope.team);
+                        
                         service.homeTeamStats(league)
                             .then(function (result) {
+                                console.log(result.data);
                                 $scope.table = result.data.standings[0].table;
                                 for (var i = 0; i < $scope.table.length; i++) {
                                     if ($scope.table[i].team.id == $scope.team.id) {
@@ -164,8 +169,8 @@
 
                             team.league = league;
                             team.leagueName = leagueName;
-                            console.log(team);
-                            console.log(service.favoriteTeams);
+                            // console.log(team);
+                            // console.log(service.favoriteTeams);
                             // console.log(service.favoriteTeams);
                             service.favoriteTeams.forEach(function(favorite_team) {
                                 if ( team.name == favorite_team.name ) {

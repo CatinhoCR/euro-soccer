@@ -26,7 +26,7 @@
         activate();
 
         function activate() {
-            LeagueService.getLeagueDetails()
+            LeagueService.getLastLeagueDetails()
                 .then(handleLeagueSuccess)
                 .catch(handleLeagueError);
         }
@@ -87,7 +87,7 @@
         function openTeamModal(team, leagueId, leagueName, season) {
             // console.log(team.id);
             // console.log(leagueName);
-            console.log(team);
+            // console.log(team);
             TeamService.openModalTeam(team, leagueId, leagueName, season);
 
             

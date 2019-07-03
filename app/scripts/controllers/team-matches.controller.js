@@ -15,7 +15,7 @@
         // TeamMatchesService
 
         function activate() {
-            TeamMatchesService.getTeamDetails()
+            TeamMatchesService.getTeamDetailsLast()
                 .then(handleTeamSuccess)
                 .catch(handleTeamError);
         }

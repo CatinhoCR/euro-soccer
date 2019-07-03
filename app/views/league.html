@@ -69,11 +69,11 @@
                 <td>
                     {{table.position}}
                 </td>
-                <td ng-click="vm.openTeamModal(table.team, vm.league_details.competition.id, vm.league_details.competition.name)">
+                <td ng-click="vm.openTeamModal(table.team, vm.league_details.competition.id, vm.league_details.competition.name, vm.league_details.season.startDate)">
                     <img width="40px" ng-src="{{table.team.crestUrl}}" alt="">
                 </td>
                 <td>
-                    <a ng-click="vm.openTeamModal(table.team, vm.league_details.competition.id, vm.league_details.competition.name)">
+                    <a ng-click="vm.openTeamModal(table.team, vm.league_details.competition.id, vm.league_details.competition.name, vm.league_details.season.startDate)">
                         {{table.team.name}}
                     </a>
                 </td>
@@ -168,7 +168,7 @@
                             <img width="40px" ng-src="{{tableG.team.crestUrl}}" alt="">
                         </td>
                         <td>
-                            <a ng-click="vm.openTeamModal(tableG.team, vm.league_details.competition.id, vm.league_details.competition.name, vm.league_details.season)">
+                            <a ng-click="vm.openTeamModal(tableG.team, vm.league_details.competition.id, vm.league_details.competition.name, vm.league_details.season.startDate)">
                                 {{tableG.team.name}}
                             </a>
                         </td>
@@ -187,8 +187,12 @@
     </div>
 </div>
 <div ng-if="vm.tableType == ''" class="content-wrapper">
-    <p>This competition hasn't been updated yet for the new season. It will be updated shortly, you can see the last season's details:</p>
-    <button ng-click="vm.getLastLeagueDetails(vm.league_details)">
-        See Details
-    </button>
+    <div class="text-center py-5">
+        <h3>Off Season !</h3>
+        <p>This competition hasn't been updated yet for the new season. It will be updated shortly, you can see the last season's details:</p>
+        <button ng-click="vm.getLastLeagueDetails(vm.league_details)">
+            See Details
+        </button>
+    </div>
+    
 </div>
