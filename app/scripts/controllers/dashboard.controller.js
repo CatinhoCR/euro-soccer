@@ -14,6 +14,7 @@
         vm.showWC = false;
         vm.sortType = 'id';
         vm.sortReverse = false;
+        
 
         function activate() {
             DashboardService.getLeagues()
@@ -23,8 +24,13 @@
         activate(DashboardService);
 
         function handleSuccess(result) {
-          vm.leagues = result.data.competitions;
-          console.log(vm.leagues);
+            vm.leagues = result.data.competitions;
+          // console.log(vm.leagues);
+            console.log("This is the basic competitions array filtered by area to europe.")
+            console.log(vm.leagues);
+
+
+
           // Can't figure out a way to get multiple results with 1 query here.. need this to calculate total matches, etc since API v2 changed those.
           /*
           for ( var i = 0; i < vm.leagues.count; i++ ) {
@@ -36,6 +42,8 @@
         function handleError(error) {
             console.log("An error occurred while loading leagues",error);
         }
+
+        
 
         function loadWC() {
             if( !vm.WC.competition ) {

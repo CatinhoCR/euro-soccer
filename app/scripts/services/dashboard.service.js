@@ -10,11 +10,11 @@
         }
         
         function getWorldCup() {
-            return $http.get(env.apiUrl + 'competitions/WC/standings', { headers: { 'X-Auth-Token': env.apiKey } });   
-        }   
+            return $http.get(env.apiUrl + 'competitions/2000/standings', { headers: { 'X-Auth-Token': env.apiKey } });   
+        }
     }
     angular
         .module('app.dashboard', [])
         .service('DashboardService', DashboardService);
-    DashboardService.$inject = ['$http', 'env'];
+    DashboardService.$inject = ['$http', 'env', '$stateParams'];
 })();

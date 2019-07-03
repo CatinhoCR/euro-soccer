@@ -8,6 +8,17 @@
     &.favorites-block {
         flex-flow: wrap;
     }
+    &.player-block {
+        margin: 0;
+        ul {
+            li {
+                span {
+                    display: block;
+                    font-weight: 700;
+                }
+            }
+        }
+    }
     &.match-block {
         .score-block {
             width: 90%;

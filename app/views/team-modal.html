@@ -1,14 +1,15 @@
 <div class="modal-header">
     <h2>
-        <img width="40px" ng-src="{{team.crestUrl}}" alt="">
-        {{team.name}}
+        <img width="40px" ng-src="{{team.crestUrl}}" alt=""> {{team.name}}
     </h2>
-    
+
     <a ng-click="addToFavorites(team, league, leagueName)">
         <i class="fa fa-star"></i>
         Add to Favorites
     </a>
-    <h2><span >{{team.area.name}}</span></h2>
+    <h2>
+        <span>{{team.area.name}}</span>
+    </h2>
 </div>
 <div class="modal-body team-modal" id="modal-body">
     <div class="row">
@@ -32,11 +33,11 @@
         <div class="col py-5">
             <h4 class="text-center">
                 <!-- <a > -->
-                    <!-- ng-click="toggleStats(team.id, 'home')" -->
+                <!-- ng-click="toggleStats(team.id, 'home')" -->
                 Home Stats
                 <!-- </a> -->
             </h4>
-            <table class="table py-3" >
+            <table class="table py-3">
                 <!-- ng-if="showHome" -->
                 <thead>
                     <th>GP</th>
@@ -64,7 +65,7 @@
     <div class="row">
         <div class="col">
             <h4 class="text-center ">Away Stats</h4>
-            <table class="table py-3" >
+            <table class="table py-3">
                 <!-- ng-if="showAway" -->
                 <thead>
                     <th>GP</th>
@@ -87,38 +88,45 @@
                     <td>{{awayStats.points}}</td>
                 </tbody>
             </table>
-              <!-- ui-sref="team({teamId: team.id})" -->
-              <div class="text-center">
-                    <button class="btn btn-brand" ng-click="openTeamPage(team)">
-                        See Team Matches
-                    </button>
-              </div>
-            
+            <!-- ui-sref="team({teamId: team.id})" -->
+            <div class="text-center">
+                <button class="btn btn-brand" ng-click="openTeamPage(team)">
+                    See Team Matches
+                </button>
+            </div>
+
         </div>
     </div>
-    
+
     <div class="row squad pt-5">
-        <div class="col-12">
+        <div class="col-12" ng-if="team.squad.length > 0">
             <h4 class="text-center">Squad</h4>
         </div>
-        <div class="col-md-4" ng-repeat="player in team.squad">
+        <div ng-if="team.squad.length == 0">
+            <h4 class="text-center">Squad members not available for this team.</h4>
+        </div>
+        <div class="col-md-4" ng-repeat="player in teamPlayers">
             <div class="card player-block">
-                <p>{{player.name}}</p>
-                <p>{{player.position}}</p>
-                <p>{{player.shirtNumber}}</p>
-                <p>{{player.nationality}}</p>
-                <!-- <p>{{player.age}}</p> -->
+                <ul>
+                    <li><span>Name:</span> {{player.name}}</li>
+                    <li><span>Position:</span> {{player.position}}</li>
+                    <li><span>Number:</span> {{player.shirtNumber}}</li>
+                    <li><span>Nationality:</span> {{player.nationality}}</li>
+                    <li><span>DoB:</span> {{player.dateOfBirth | amUtc | amLocal | amDateFormat:'MM/DD/YYYY - HH:mm'}}</li>
+                    <li><span>Age:</span> {{player.age}}</li>
+                            <!-- <p>{{player.age}}</p> -->
+                </ul>
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    
+
+
+
+
+
 </div>
 <div class="modal-footer">
-    
+
 </div>
 
 <!-- <div class="modal-header">

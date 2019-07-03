@@ -14,7 +14,7 @@
         service.teamStats;
 
         service.getTeamStats = getTeamStats;
-        // service.getTeamPlayers = getTeamPlayers;
+        
         service.homeTeamStats = homeTeamStats;
         service.awayTeamStats = awayTeamStats;
 
@@ -26,6 +26,9 @@
         service.addFavoriteTeam = addFavoriteTeam;
         service.getFavoriteTeams = getFavoriteTeams
         service.favoriteTeams = [];
+        service.getPlayerAge = getPlayerAge;
+        service.getTeamPlayers = getTeamPlayers;
+        service.teamPlayers = [];
 
         service.opened = false;
 
@@ -33,6 +36,11 @@
             return $http.get(env.apiUrl + 'teams/' + team.id, { headers: { 'X-Auth-Token': env.apiKey } });
         }
 
+        // /competitions/2014/matches?season=2018
+        function getLastTeamStats(league) {
+            return $http.get(env.apiUrl + 'competitions/' + league + '/matches?season=2018&stage=GROUP_STAGE', { headers: { 'X-Auth-Token': env.apiKey } });
+        }
+        // ?season=2018&stage=GROUP_STAGE
         //https://api.football-data.org/v2/competitions/2021/standings?standingType=HOME
         // http://api.football-data.org/v2/teams/81/matches
         function awayTeamStats(league) {
@@ -54,18 +62,35 @@
             return service.favoriteTeams;
         }
 
-        /*function getTeamPlayers(team_href) {
-            console.log("Get players");
-            return $http.get(env.apiUrl + team_href + '/players', { headers: { 'X-Auth-Token': env.apiKey } });
-        }*/
+        function getPlayerAge(player) {
+//            for ( var i = 0; i < team.squad.length; i++ ) {
+                var age = new Date(player.dateOfBirth).getFullYear();
+                var now = new Date().getFullYear();
+                // age.diff(now, 'years');
+                return now - age;
+            // }
+        }
 
-        function openModalTeam(team, league, leagueName) {
+        function getTeamPlayers(team) {
+            for ( var i = 0; i < team.squad.length; i++ ) {
+                if ( team.squad[i].role === 'PLAYER' ) {
+                    team.squad[i].age = service.getPlayerAge(team.squad[i]);
+                    service.teamPlayers.push(team.squad[i]);
+                }
+            }
+            // console.log("Get players");
+            // return $http.get(env.apiUrl + team_href + '/players', { headers: { 'X-Auth-Token': env.apiKey } });
+            
+        }
+
+        function openModalTeam(team, league, leagueName, season) {
 
             // get team full stats and players
 
             // this has the squad
             // service.selectedTeam = 
             // console.log(service.selectedTeam);
+            console.log(season);
 
             getTeamStats(team)
                 .then(function (result) {
@@ -76,6 +101,7 @@
                 });
                 
             function populateModal() {
+                console.log(service.selectedTeam);
                 if ( service.opened ){
                     return;
                 };
@@ -96,6 +122,14 @@
                         $scope.team = service.selectedTeam;
                         $scope.league = league;
                         $scope.leagueName = leagueName;
+
+                        service.getTeamPlayers($scope.team);
+                            // .then(function(result){
+                            //     console.log(result);
+                                
+                            //     console.log($scope.teamPlayers)
+                            // })
+                        
                         // console.log($scope.team);
                         service.homeTeamStats(league)
                             .then(function (result) {
@@ -119,7 +153,7 @@
                                 }
                                 service.awayStats = $scope.awayStats;
                             });
-                        
+                        $scope.teamPlayers = service.teamPlayers;
                         $scope.addToFavorites = function (team, league, leagueName) {
                             // 
 

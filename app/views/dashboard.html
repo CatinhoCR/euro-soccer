@@ -32,19 +32,19 @@
     </div>
     <div class="col col-md-4" ng-repeat="league in vm.leagues | orderBy:vm.sortType:vm.sortReverse | filter:searchLeague">
         <div class="leagues-block card">
-            <h2>{{league.name}}
+            <h2>
+                {{league.name}}
                 <span class="float-right">{{league.area.name}}</span>
             </h2>
             <ul>
                 <li>
                     Current Matchday: {{league.currentSeason.currentMatchday}}
-                    <span ng-if="!league.currentSeason.currentMatchday">1</span>
+                    <span ng-if="!league.currentSeason.currentMatchday">1 <small>Off Season</small></span>
                 </li>
                 <li>Start Date: {{league.currentSeason.startDate}}</li>
                 <li>End Date: {{league.currentSeason.endDate}}</li>
             </ul>
             <a ui-sref="league({leagueId: league.id})" class="btn btn-brand">Details</a>
         </div>
-        <!-- | filter : search -->
     </div>
 </div>

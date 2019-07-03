@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+<div class="content-wrapper" ng-if="vm.tableType === 'league'">
     <table class="table">
         <thead>
             <tr>
@@ -10,7 +10,7 @@
                     </a>
                 </th>
                 <th colspan="2">
-                    <a >
+                    <a>
                         Team
                     </a>
                 </th>
@@ -22,17 +22,17 @@
                     </a>
                 </th>
                 <th>
-                    <a >
+                    <a>
                         W
                     </a>
                 </th>
                 <th>
-                    <a >
+                    <a>
                         D
                     </a>
                 </th>
                 <th>
-                    <a >
+                    <a>
                         L
                     </a>
                 </th>
@@ -58,7 +58,7 @@
                     </a>
                 </th>
                 <th>
-                    <a >
+                    <a>
                         Pts
                     </a>
                 </th>
@@ -69,7 +69,7 @@
                 <td>
                     {{table.position}}
                 </td>
-                <td>
+                <td ng-click="vm.openTeamModal(table.team, vm.league_details.competition.id, vm.league_details.competition.name)">
                     <img width="40px" ng-src="{{table.team.crestUrl}}" alt="">
                 </td>
                 <td>
@@ -88,5 +88,107 @@
             </tr>
         </tbody>
     </table>
-
+</div>
+<div class="row" ng-if="vm.tableType == 'groups'">
+    <div class="col" ng-repeat="group in vm.groupStandings">
+        <div class="card group-block">
+            <!-- {{group}} -->
+            <h4>{{group.group}}</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <a ng-click="vm.sortType = 'position'; vm.sortReverse = !vm.sortReverse">
+                                Pos
+                                <i class="fa fa-caret-down" ng-if="vm.sortType === 'position' && !vm.sortReverse"></i>
+                                <i class="fa fa-caret-up" ng-if="vm.sortType === 'position' && vm.sortReverse"></i>
+                            </a>
+                        </th>
+                        <th colspan="2">
+                            <a>
+                                Team
+                            </a>
+                        </th>
+                        <th>
+                            <a ng-click="vm.sortType = 'playedGames'; vm.sortReverse = !vm.sortReverse">
+                                GP
+                                <i class="fa fa-caret-down" ng-if="vm.sortType === 'playedGames' && !vm.sortReverse"></i>
+                                <i class="fa fa-caret-up" ng-if="vm.sortType === 'playedGames' && vm.sortReverse"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a>
+                                W
+                            </a>
+                        </th>
+                        <th>
+                            <a>
+                                D
+                            </a>
+                        </th>
+                        <th>
+                            <a>
+                                L
+                            </a>
+                        </th>
+                        <th>
+                            <a ng-click="vm.sortType = 'goalsFor'; vm.sortReverse = !vm.sortReverse">
+                                GF
+                                <i class="fa fa-caret-down" ng-if="vm.sortType === 'goalsFor' && !vm.sortReverse"></i>
+                                <i class="fa fa-caret-up" ng-if="vm.sortType === 'goalsFor' && vm.sortReverse"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a ng-click="vm.sortType = 'goalsAgainst'; vm.sortReverse = !vm.sortReverse">
+                                GA
+                                <i class="fa fa-caret-down" ng-if="vm.sortType === 'goalsAgainst' && !vm.sortReverse"></i>
+                                <i class="fa fa-caret-up" ng-if="vm.sortType === 'goalsAgainst' && vm.sortReverse"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a ng-click="vm.sortType = 'goalDifference'; vm.sortReverse = !vm.sortReverse">
+                                GD
+                                <i class="fa fa-caret-down" ng-if="vm.sortType === 'goalDifference' && !vm.sortReverse"></i>
+                                <i class="fa fa-caret-up" ng-if="vm.sortType === 'goalDifference' && vm.sortReverse"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <a>
+                                Pts
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="tableG in group.table | orderBy:vm.sortType:vm.sortReverse">
+                        <td>
+                            {{tableG.position}}
+                        </td>
+                        <td ng-click="vm.openTeamModal(tableG.team, vm.league_details.competition.id, vm.league_details.competition.name, vm.league_details.season.startDate)">
+                            <img width="40px" ng-src="{{tableG.team.crestUrl}}" alt="">
+                        </td>
+                        <td>
+                            <a ng-click="vm.openTeamModal(tableG.team, vm.league_details.competition.id, vm.league_details.competition.name, vm.league_details.season)">
+                                {{tableG.team.name}}
+                            </a>
+                        </td>
+                        <td>{{tableG.playedGames}}</td>
+                        <td>{{tableG.won}}</td>
+                        <td>{{tableG.draw}}</td>
+                        <td>{{tableG.lost}}</td>
+                        <td>{{tableG.goalsFor}}</td>
+                        <td>{{tableG.goalsAgainst}}</td>
+                        <td>{{tableG.goalDifference}}</td>
+                        <td>{{tableG.points}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div ng-if="vm.tableType == ''" class="content-wrapper">
+    <p>This competition hasn't been updated yet for the new season. It will be updated shortly, you can see the last season's details:</p>
+    <button ng-click="vm.getLastLeagueDetails(vm.league_details)">
+        See Details
+    </button>
 </div>
