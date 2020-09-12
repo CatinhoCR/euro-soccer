@@ -1,5 +1,4 @@
-# "Score Now" app developed for Eleven Systems job application's test
-This app has been developed by Andrés Castillo ([(Email)](mailto:cato@castilloquesada.com)) as part of the job application process for Eleven Systems.
+# "Score Now" app developed test
 
 ## Based and Modified from AngularJS Starter
 Used a seed starter project for quick angularJS app setup, but heavily modified before starting to work. Some of the initial modifications include (but not limited to):
